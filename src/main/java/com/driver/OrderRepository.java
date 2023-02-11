@@ -90,15 +90,18 @@ public class OrderRepository {
             }
         }
         String lastDeliveryTime = "";
+        if(lastTime/60<10){lastDeliveryTime+="0";}
         lastDeliveryTime+=String.valueOf(lastTime/60);
         lastDeliveryTime+=":";
+        if(lastTime%60<10){lastDeliveryTime+="0";}
         lastDeliveryTime+=String.valueOf(lastTime%60);
         return lastDeliveryTime;
     }
 
     public void deletePartnerById(String partnerId){
         partnerMap.remove(partnerId);
-        for(Order order:partnerOrderMap.get(partnerId)){
+        List<Order> orders = partnerOrderMap.get(partnerId);
+        for(Order order:orders){
             orderPartnerMap.remove(order.getId());
         }
         partnerOrderMap.remove(partnerId);
@@ -108,7 +111,9 @@ public class OrderRepository {
         DeliveryPartner deliveryPartner = orderPartnerMap.get(orderId);
         String partnerId = deliveryPartner.getId();
         Order order = orderMap.get(orderId);
-        partnerOrderMap.get(partnerId).remove(order);
+        List<Order> orders = partnerOrderMap.get(partnerId);
+        orders.remove(order);
+        partnerOrderMap.put(partnerId, orders);
         orderPartnerMap.remove(orderId);
         orderMap.remove(orderId);
     }
