@@ -101,16 +101,21 @@ public class OrderRepository {
     public void deletePartnerById(String partnerId){
         partnerMap.remove(partnerId);
         List<Order> orders = partnerOrderMap.get(partnerId);
+        List<String> list = new ArrayList<>();
         for(String s:orderPartnerMap.keySet()){
-            if(orderPartnerMap.get(s).getId().equals(partnerId)){
-                orderPartnerMap.remove(s);
+            if(partnerId.equals(orderPartnerMap.get(s).getId())){
+                list.add(s);
             }
+        }
+        for(String s:list){
+            orderPartnerMap.remove(s);
         }
         partnerOrderMap.remove(partnerId);
     }
 
     public void deleteOrderById(String orderId){
         DeliveryPartner deliveryPartner = orderPartnerMap.get(orderId);
+        deliveryPartner.setNumberOfOrders(deliveryPartner.getNumberOfOrders()-1);
         String partnerId = deliveryPartner.getId();
         Order order = orderMap.get(orderId);
         List<Order> orders = partnerOrderMap.get(partnerId);
