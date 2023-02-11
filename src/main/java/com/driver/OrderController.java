@@ -63,7 +63,7 @@ public class OrderController {
     @GetMapping("/get-order-count-by-partner-id/{partnerId}")
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
-        Integer orderCount = 0;
+        int orderCount = 0;
 
         //orderCount should denote the orders given by a partner-id
         orderCount = orderService.getOrderCountByPartnerId(partnerId);
@@ -90,7 +90,7 @@ public class OrderController {
 
     @GetMapping("/get-count-of-unassigned-orders")
     public ResponseEntity<Integer> getCountOfUnassignedOrders(){
-        Integer countOfOrders = 0;
+        int countOfOrders = 0;
 
         //Count of orders that have not been assigned to any DeliveryPartner
         countOfOrders = orderService.getCountOfUnassignedOrders();
@@ -100,7 +100,7 @@ public class OrderController {
     @GetMapping("/get-count-of-orders-left-after-given-time/{partnerId}")
     public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId){
 
-        Integer countOfOrders = 0;
+        int countOfOrders = 0;
 
         //countOfOrders that are left after a particular time of a DeliveryPartner
         countOfOrders = orderService.getOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
