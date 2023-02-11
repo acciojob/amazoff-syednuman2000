@@ -66,7 +66,8 @@ public class OrderRepository {
     }
 
     public int getCountOfUnassignedOrders(){
-        return orderPartnerMap.size() - orderMap.size();
+
+        return orderMap.size()-orderPartnerMap.size();
     }
 
     public int getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId){
