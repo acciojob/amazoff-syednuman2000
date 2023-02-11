@@ -52,7 +52,7 @@ public class OrderRepository {
         List<Order> orders = partnerOrderMap.get(partnerId);
         List<String> list = new ArrayList<>();
         for(Order order:orders){
-            list.add(order.toString());
+            list.add(order.getId());
         }
         return list;
     }
@@ -60,7 +60,7 @@ public class OrderRepository {
     public List<String> getAllOrders(){
         List<String> list = new ArrayList<>();
         for(String s : orderMap.keySet()){
-            list.add(orderMap.get(s).toString());
+            list.add(s);
         }
         return list;
     }
